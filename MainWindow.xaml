@@ -7,6 +7,70 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="148" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--Palette-->
+        <ScrollViewer Grid.Column="0" Grid.Row="1">
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Button Height="128" Width="128">Btn</Button>
+                <Button Height="128" Width="128">Btn</Button>
+                <Button Height="128" Width="128">Btn</Button>
+                <Button Height="128" Width="128">Btn</Button>
+                <Button Height="128" Width="128">Btn</Button>
+                <Button Height="128" Width="128">Btn</Button>
+                <Button Height="128" Width="128">Btn</Button>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <!--Menu Bar-->
+        <Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
+            <MenuItem Header="_File">
+                <MenuItem Header ="New" Command="New"/>
+                <MenuItem Header ="Open" Command="Open"/>
+                <MenuItem Header ="Save" Command="Save"/>
+            </MenuItem>
+            <MenuItem Header="_Tools">
+                <MenuItem Header ="_Brush Size"/>
+                <MenuItem Header ="_Eraser"/>
+            </MenuItem>
+        </Menu>
+        
+        <!--Uniform grid-->
+        <Grid Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <!--<Rectangle Height="32" Width="32" Grid.Column="0" Grid.Row="0" Fill="LightBlue" Margin="0"></Rectangle>-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="32" />
+                <ColumnDefinition Width="32" />
+                <ColumnDefinition Width="32" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Rectangle Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="Black" StrokeThickness="1" ></Rectangle>
+            <Rectangle Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="Black" StrokeThickness="1"></Rectangle>
+            <Rectangle Grid.Column="3" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="Black" StrokeThickness="1"></Rectangle>
+            <Rectangle Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="Black" StrokeThickness="1"></Rectangle>
+            <Rectangle Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="Black" StrokeThickness="1"></Rectangle>
+            <Rectangle Grid.Column="3" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="Black" StrokeThickness="1"></Rectangle>
+            <Rectangle Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="Black" StrokeThickness="1"></Rectangle>
+            <Rectangle Grid.Column="2" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="Black" StrokeThickness="1"></Rectangle>
+            <Rectangle Grid.Column="3" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="Black" StrokeThickness="1"></Rectangle>
+        </Grid>
         
     </Grid>
 </Window>
+
+    
