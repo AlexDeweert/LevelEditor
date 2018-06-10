@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:LevelEditor"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+         <!-- ok -->
     </Application.Resources>
 </Application>

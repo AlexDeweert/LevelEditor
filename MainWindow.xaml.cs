@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 namespace LevelEditor
 {
+    /*This is read only?*/
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
