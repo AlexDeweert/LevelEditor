@@ -23,6 +23,18 @@ namespace LevelEditor
         public MainWindow()
         {
             InitializeComponent();
+            ChildWindow gridWindow = new ChildWindow();
+            gridWindow.Owner = this;
+
+            //This won't work....the child window must subscribe to the
+            //parent window - alternatively, think about embedding a child
+            //window instantiated into a parent window somehow
+            //private void OnActivated(object sender, EventArgs eventArgs)
+            //{
+            //    owned.Owner = this;
+            //    Activated -= OnActivated;
+            //}
+            gridWindow.Show();
         }
     }
 }
