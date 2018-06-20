@@ -18,7 +18,7 @@
 
         <!--Tilegrid-->
         <ScrollViewer Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Visible">
-            <Grid Name="dynamicGrid" ShowGridLines="True">
+            <Grid Name="dynamicGrid" ShowGridLines="False">
                 <!--<Rectangle Grid.Column="2" Grid.Row="2" Fill="Aquamarine"></Rectangle>-->
             </Grid>
         </ScrollViewer>
@@ -46,6 +46,9 @@
             <MenuItem Header="_Tools">
                 <MenuItem Header ="_Brush Size"/>
                 <MenuItem Header ="_Eraser"/>
+            </MenuItem>
+            <MenuItem Header="_Textures">
+                <MenuItem Header ="_Import" Click="ImportTexture"/>
             </MenuItem>
         </Menu>
 
