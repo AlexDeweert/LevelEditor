@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using LevelEditor.ViewModels;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,11 +24,15 @@ namespace LevelEditor
     /// </summary>
     public partial class GridWindow : Window
     {
+        private PaletteViewModel _paletteViewModel;
+        public int TileSize { set; get; }
 
         public GridWindow()
         {
             InitializeComponent();
-            CreateGrid(5,5,dynamicGrid, 32);
+            TileSize = 32;
+            this._paletteViewModel = new PaletteViewModel();
+            CreateGrid(5,5,dynamicGrid, TileSize);
         }
 
         /*CreateGrid
@@ -169,22 +174,43 @@ namespace LevelEditor
 
         private void ImportTexture(object sender, RoutedEventArgs e)
         {
+            string textureUri = null;
             System.Diagnostics.Debug.WriteLine("IMPORT TEXTURE clicked");
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg|All files (*.*)|*.*";
             //openFileDialog.InitialDirectory = @"c:\";
             /*Uses the dictory last used*/
             openFileDialog.RestoreDirectory = true;
-            if (openFileDialog.ShowDialog() == true)
+            if ( (bool)openFileDialog.ShowDialog() )
             {
-                CopyFileToProjectDirectory(openFileDialog);
+                textureUri = CopyFileToProjectDirectory(openFileDialog);
+            }
+
+            if (textureUri != null)
+            {
+                Print("textureUri of imported image is now in: " + textureUri);
             }
 
             //TODO After importing the texture, making the resource available to the program thereafter
             //ResourceManager?
+
+            /*Not sure if this works to add an _newImage to the Palette scrollview as a button in the UI*/
+            Image image = new Image();
+            image.Height = this.TileSize;
+            image.Width = this.TileSize;
+            BitmapImage bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            //URI: "Uniform Resource Identifiers"
+            bitmapImage.UriSource = new Uri(textureUri, UriKind.Relative);
+            bitmapImage.DecodePixelHeight = this.TileSize;
+            bitmapImage.DecodePixelWidth = this.TileSize;
+            bitmapImage.EndInit();
+            image.Source = bitmapImage;
+            _paletteViewModel.ImageList.Add(image);
+
         }
 
-        private void CopyFileToProjectDirectory(OpenFileDialog dialog)
+        private string CopyFileToProjectDirectory(OpenFileDialog dialog)
         {
             try
             {
@@ -201,17 +227,24 @@ namespace LevelEditor
 
                 //Get the destination directory path
                 string thisProgramDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-                string copyToFolder = "\\images\\";
+                string copyToFolder = "\\Images\\";
                 thisProgramDirectory += copyToFolder;
                 System.Diagnostics.Debug.WriteLine("Got this program dir is: " + thisProgramDirectory);
 
                 //Finally copy the file
                 File.Copy(System.IO.Path.Combine(filePathOnly, filename), System.IO.Path.Combine(thisProgramDirectory, filename), true);
+                return thisProgramDirectory + filename;
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine("Error copying texture to destination: " + e.ToString());
+                return null;
             }
+        }
+
+        private void Print(string str)
+        {
+            System.Diagnostics.Debug.WriteLine(str);
         }
     }
 }

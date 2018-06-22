@@ -5,7 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:grid="clr-namespace:LevelEditor"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:c="clr-namespace:LevelEditor.ViewModels"
         Title="GridWindow" Height="450" Width="800">
+    <Window.Resources>
+        <c:PaletteViewModel x:Key="ImageList"/>
+    </Window.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="148" />
@@ -25,15 +30,13 @@
         
         <!--Palette-->
         <ScrollViewer Grid.Column="0" Grid.Row="1">
-            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Button Height="128" Width="128">Btn</Button>
-                <Button Height="128" Width="128">Btn</Button>
-                <Button Height="128" Width="128">Btn</Button>
-                <Button Height="128" Width="128">Btn</Button>
-                <Button Height="128" Width="128">Btn</Button>
-                <Button Height="128" Width="128">Btn</Button>
-                <Button Height="128" Width="128">Btn</Button>
-            </StackPanel>
+            <ItemsControl ItemsSource="{Binding ImageList}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
         </ScrollViewer>
 
         <!--Menu Bar-->
