@@ -5,15 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:grid="clr-namespace:LevelEditor"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
-        xmlns:c="clr-namespace:LevelEditor.ViewModels"
         Title="GridWindow" Height="450" Width="800">
-    <Window.Resources>
+    <!--xmlns:c="clr-namespace:LevelEditor.ViewModels"-->
+    <!--<Window.Resources>
         <c:PaletteViewModel x:Key="ImageList"/>
-    </Window.Resources>
+        <c:PaletteViewModel x:Key="PaletteTileSize"/>
+    </Window.Resources>-->
     
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="148" />
+            <ColumnDefinition Width="82" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -23,20 +24,16 @@
 
         <!--Tilegrid-->
         <ScrollViewer Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Visible">
-            <Grid Name="dynamicGrid" ShowGridLines="False">
+            <Grid Name="levelGrid" ShowGridLines="False">
                 <!--<Rectangle Grid.Column="2" Grid.Row="2" Fill="Aquamarine"></Rectangle>-->
             </Grid>
         </ScrollViewer>
         
         <!--Palette-->
-        <ScrollViewer Grid.Column="0" Grid.Row="1">
-            <ItemsControl ItemsSource="{Binding ImageList}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Canvas />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
+        <ScrollViewer Grid.Column="0" Grid.Row="1" VerticalScrollBarVisibility="Visible">
+            <Grid Name="dynamicPalette" ShowGridLines="False">
+                <!--<Rectangle Grid.Column="2" Grid.Row="2" Fill="Aquamarine"></Rectangle>-->
+            </Grid>
         </ScrollViewer>
 
         <!--Menu Bar-->

@@ -6,84 +6,42 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace LevelEditor.ViewModels
 {
     public class PaletteViewModel
     {
-        private ExtendedObservableCollection<Image> _imageList = new ExtendedObservableCollection<Image>();
-        //public event PropertyChangedEventHandler PropertyChanged;
-        //public ObservableCollection<Image> ImageList
-        //{
-        //    get
-        //    {
-        //        return this._imageList;
-        //    }
-        //    set
-        //    {
-        //        if (value != this._imageList)
-        //        {
-        //            this._imageList = value;
-        //            foreach (Image i in this._imageList)
-        //            {
-        //                System.Diagnostics.Debug.WriteLine("ImageList Contents: " + i.Source.ToString());
-        //            }
-        //            OnPropertyChanged("ImageListChanged");
-        //        }
-        //    }
-            
-        //}
-        //public PaletteViewModel() {/*...*/}
-        //protected void OnPropertyChanged(string _propertyName)
-        //{
-        //    PropertyChangedEventHandler handler = PropertyChanged;
-        //    if (handler != null)
-        //    {
-        //        System.Diagnostics.Debug.WriteLine("PROPERTY CHANGED: " + _propertyName);
-        //        handler(this, new PropertyChangedEventArgs(_propertyName));
-        //    }
-        //}
-    }
+        public event PropertyChangedEventHandler PropertyChanged;
+        private ObservableCollection<Image> _imageList = new ObservableCollection<Image>();
 
-    public sealed class ExtendedObservableCollection<T> : ObservableCollection<T>
-        where T : INotifyPropertyChanged
-    {
-        public ExtendedObservableCollection()
+        public ObservableCollection<Image> ImageList
         {
-            CollectionChanged += FullObservableCollectionChanged;
-        }
-
-        public ExtendedObservableCollection( IEnumerable<T> pItems ) : this()
-        {
-            foreach (var item in pItems)
+            get
             {
-                this.Add(item);
+                return this._imageList;
             }
-        }
-
-        private void FullObservableCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
+            set
             {
-                foreach (Object item in e.NewItems)
+                System.Diagnostics.Debug.WriteLine("Setting something in image list...");
+                this._imageList = value;
+                foreach (Image i in this._imageList)
                 {
-                    ((INotifyPropertyChanged)item).PropertyChanged += ItemPropertyChanged;
+                    System.Diagnostics.Debug.WriteLine("ImageList Contents: " + i.Source.ToString());
                 }
-            }
-            if (e.OldItems != null)
-            {
-                foreach (Object item in e.OldItems)
-                {
-                    ((INotifyPropertyChanged)item).PropertyChanged -= ItemPropertyChanged;
-                }
+                OnPropertyChanged("ImageListChanged");
             }
         }
-
-        private void ItemPropertyChanged(object sender, PropertyChangedEventArgs e)
+        public PaletteViewModel() {/*...*/}
+        protected void OnPropertyChanged(string _propertyName)
         {
-            NotifyCollectionChangedEventArgs args = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, sender, sender, IndexOf((T)sender));
-            OnCollectionChanged(args);
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                System.Diagnostics.Debug.WriteLine("PROPERTY CHANGED: " + _propertyName);
+                handler(this, new PropertyChangedEventArgs(_propertyName));
+            }
         }
     }
 }
